@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FirebaseDemo DroidconIT 2016</string>
+    <string name="demo_label_color">HELLO FIREBASE!</string>
+
+    <string name="demo_label_status">Status</string>
+    <string name="demo_label_connected_users">Connected Users</string>
+    <string name="demo_connected_users">YOU ARE %d</string>
+    <string name="demo_status_live">WE ARE LIVE ON FIREBASE</string>
+    <string name="demo_status_start_at">Demo starts on %s</string>
+    <string name="demo_status_finished">Demo is finished, thank you!</string>
+</resources>
