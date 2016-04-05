@@ -30,6 +30,12 @@ public interface IDemoView extends IView {
 
     /**
      *
+     * @param enabled
+     */
+    public void setDemoEnabled(boolean enabled);
+
+    /**
+     *
      * @param firebaseError
      */
     public void setFirebaseError(FirebaseError firebaseError);

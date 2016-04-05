@@ -43,6 +43,7 @@ public class MainFragmentPresenter implements IDemoViewLifecycle {
     private long mStartTime;
     private long mEndtime;
     private int mAttendantCounter;
+    private boolean mEnabled;
 
     /**
      *
@@ -249,7 +250,12 @@ public class MainFragmentPresenter implements IDemoViewLifecycle {
                 Map<String, Object> data = dataSnapshot.getValue(Map.class);
                 mCurrentTime = System.currentTimeMillis();
                 mStartTime = (long) data.get("startTime");
-                if(mEndtime != (long) data.get("endTime")) {
+                mEndtime = (long) data.get("endTime");
+                if(mView != null) {
+                    mView.setDemoDates(currentStatus(), mCurrentTime, mStartTime, mEndtime);
+                }
+
+                /*if(mEndtime != (long) data.get("endTime")) {
                     mEndtime = (long) data.get("endTime");
 
                     new Handler().postAtTime(new Runnable() {
@@ -263,6 +269,24 @@ public class MainFragmentPresenter implements IDemoViewLifecycle {
 
                 if (mView != null) {
                     mView.setDemoDates(currentStatus(), mCurrentTime, mStartTime, mEndtime);
+                }*/
+            }
+
+            @Override
+            public void onCancelled(FirebaseError firebaseError) {
+                if(firebaseError != null && mView != null) {
+                    mView.setFirebaseError(firebaseError);
+                }
+            }
+        });
+
+        mFirebaseRootRef.child("status/enabled").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                mEnabled = dataSnapshot.getValue(Boolean.class);
+                if(mView != null) {
+                    mView.setDemoEnabled(mEnabled);
                 }
             }
 

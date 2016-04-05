@@ -189,18 +189,21 @@ public class MainFragment extends Fragment implements IDemoView {
         switch (status) {
             case MainFragmentPresenter.ScheduleStatus.TO_START:
                 mTvStatus.setText(getString(R.string.demo_status_start_at, mSDF.format(new Date(startTime))));
-                setColorsEnabled(false);
                 break;
+        }
+    }
 
-            case MainFragmentPresenter.ScheduleStatus.LIVE:
-                mTvStatus.setText(getString(R.string.demo_status_live));
-                setColorsEnabled(true);
-                break;
-
-            case MainFragmentPresenter.ScheduleStatus.FINISHED:
-                mTvStatus.setText(getString(R.string.demo_status_finished, mSDF.format(new Date(startTime))));
-                setColorsEnabled(false);
-                break;
+    /**
+     *
+     * @param enabled
+     */
+    @Override
+    public void setDemoEnabled(boolean enabled) {
+        setColorsEnabled(enabled);
+        if(enabled) {
+            mTvStatus.setText(getString(R.string.demo_status_live));
+        } else {
+            mTvStatus.setText(getString(R.string.demo_status_disabled));
         }
     }
 
